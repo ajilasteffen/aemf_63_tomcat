@@ -34,8 +34,8 @@ RUN chmod 777 /opt/aem/crx
 
 # Install Tomcat
 ADD https://onedrive.live.com/download?cid=ABC9EC3E389595EB&resid=ABC9EC3E389595EB%21540&authkey=ADswZ7eHdERLRYk /opt/tomcat.zip
-RUN unzip tomcat.zip -d /opt/
-RUN rm tomcat.zip
+RUN unzip /opt/tomcat.zip -d /opt/
+RUN rm /opt/tomcat.zip
 
 # Add AIS keystore
 ADD https://onedrive.live.com/download?cid=ABC9EC3E389595EB&resid=ABC9EC3E389595EB%21534&authkey=AAJNkrsXdoyy000 /opt/aem/keystore/ajila-swisscom-ais-ssl.jks
@@ -51,8 +51,8 @@ ENV PATH $PATH:$CATALINA_HOME/bin
 
 EXPOSE 8080
 EXPOSE 8009
-VOLUME "/opt/tomcat/webapps"
-WORKDIR /opt/tomcat
+VOLUME "/opt/"
+WORKDIR /opt/
 
 # Launch Tomcat
-# CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
