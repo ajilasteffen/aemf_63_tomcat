@@ -1,19 +1,18 @@
 FROM ubuntu:14.04
 
-
 # Set locales
 RUN locale-gen en_GB.UTF-8
 ENV LANG en_GB.UTF-8
 ENV LC_CTYPE en_GB.UTF-8
 
-# Fix sh
+# Fix shell
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-# Install dependencies
+# Install dependencies & essentials
 RUN apt-get update && \
 apt-get install -y git build-essential curl wget software-properties-common
 
-# Install JDK 8
+# Install JDK 8 (& re-install certificats)
 RUN \
 echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
 add-apt-repository -y ppa:webupd8team/java && \
@@ -23,17 +22,17 @@ apt-get install -y oracle-java8-installer wget unzip tar && \
 rm -rf /var/lib/apt/lists/* && \
 rm -rf /var/cache/oracle-jdk8-installer
 
-# Define commonly used JAVA_HOME variable
+# Set JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
-# Create folders
+# Create folders & set rights
 RUN mkdir /opt/aem/
 RUN mkdir /opt/aem/crx/
 RUN mkdir /opt/aem/keystore/
 RUN chmod 777 /opt/aem/crx
 
 # Install Tomcat
-ADD https://onedrive.live.com/download?cid=ABC9EC3E389595EB&resid=ABC9EC3E389595EB%21540&authkey=ADswZ7eHdERLRYk /opt/tomcat.zip
+ADD https://onedrive.live.com/download?cid=ABC9EC3E389595EB&resid=ABC9EC3E389595EB%21542&authkey=AGUCj-5xxM5BT3E /opt/tomcat.zip
 RUN unzip /opt/tomcat.zip -d /opt/
 RUN rm /opt/tomcat.zip
 
