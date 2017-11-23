@@ -31,16 +31,21 @@ RUN mkdir /opt/aem/crx/
 RUN mkdir /opt/aem/keystore/
 RUN chmod 777 /opt/aem/crx
 
-# Install Tomcat
-ADD https://onedrive.live.com/download?cid=ABC9EC3E389595EB&resid=ABC9EC3E389595EB%21542&authkey=AGUCj-5xxM5BT3E /opt/tomcat.zip
-RUN unzip /opt/tomcat.zip -d /opt/
-RUN rm /opt/tomcat.zip
+# Install pre-configured Tomcat
+# ADD https://onedrive.live.com/download?cid=ABC9EC3E389595EB&resid=ABC9EC3E389595EB%21542&authkey=AGUCj-5xxM5BT3E /opt/tomcat.zip
+# RUN unzip /opt/tomcat.zip -d /opt/
+# RUN rm /opt/tomcat.zip
+
+# Install pre-configured Tomcat (debug mode)
+ADD https://onedrive.live.com/download?cid=ABC9EC3E389595EB&resid=ABC9EC3E389595EB%21547&authkey=AHGPEUnwMT-o70M /opt/tomcat-debug.zip
+RUN unzip /opt/tomcat-debug.zip -d /opt/
+RUN rm /opt/tomcat-debug.zip
 
 # Add AIS keystore
 ADD https://onedrive.live.com/download?cid=ABC9EC3E389595EB&resid=ABC9EC3E389595EB%21534&authkey=AAJNkrsXdoyy000 /opt/aem/keystore/ajila-swisscom-ais-ssl.jks
 
 # Install AEM
-ADD https://onedrive.live.com/download?cid=ABC9EC3E389595EB&resid=ABC9EC3E389595EB%21538&authkey=AOdabYPx7chRl94 /opt/tomcat/webapps/ROOT.war
+ADD https://onedrive.live.com/download?cid=ABC9EC3E389595EB&resid=ABC9EC3E389595EB%21544&authkey=APl01iAYTh5Vadk /opt/tomcat/webapps/ROOT.war
 
 # Add AEM license file
 ADD https://onedrive.live.com/download?cid=ABC9EC3E389595EB&resid=ABC9EC3E389595EB%21535&authkey=ABIw0ytIYlDWX-M /opt/aem/license.properties
@@ -49,9 +54,10 @@ ENV CATALINA_HOME /opt/tomcat
 ENV PATH $PATH:$CATALINA_HOME/bin
 
 EXPOSE 8080
+EXPOSE 8888
 EXPOSE 8009
-VOLUME "/opt/"
-WORKDIR /opt/
+VOLUME "/opt/aem"
+WORKDIR /opt/aem
 
 # Launch Tomcat
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]
