@@ -2,7 +2,6 @@ aemf_63_tomcat:
   image: ajilasteffen/aemf_63_tomcat
   ports:
   - "8080:8080"
-  - "8888:8888"
   - "9009:8009"
   volumes:
   - "/opt/aem:/opt/aem"
