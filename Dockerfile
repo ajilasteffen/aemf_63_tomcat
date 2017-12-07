@@ -63,7 +63,7 @@ ENV PATH $PATH:$CATALINA_HOME/bin
 EXPOSE 8080
 # EXPOSE 8888
 EXPOSE 8009
-VOLUME "/opt/aem"
+# VOLUME "/opt/aem"
 WORKDIR /opt/aem
 
 # Launch Tomcat

@@ -1,7 +1,7 @@
 aemf_63_tomcat:
   image: ajilasteffen/aemf_63_tomcat
+  container_name: aemf_63_tomcat
   ports:
   - "8080:8080"
   - "9009:8009"
-  volumes:
-  - "/opt/aem:/opt/aem"
+  mem_limit: 3096m
